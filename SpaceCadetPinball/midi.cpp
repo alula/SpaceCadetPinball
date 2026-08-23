@@ -124,6 +124,11 @@ int midi::music_stop()
 
 #ifdef MUSIC_SDL
 	return Mix_HaltMusic();
+#elif defined(MUSIC_TSF)
+	tsf_note_off_all(tsfSynth);
+	currentMessage = nullptr;
+	midiTime = 0.0f;
+	return 1;
 #else
 	return 0;
 #endif
